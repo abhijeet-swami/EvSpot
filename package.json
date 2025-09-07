@@ -1,0 +1,44 @@
+{
+  "name": "evspot",
+  "version": "1.0.0",
+  "description": "EvSpot is a backend-powered platform for managing and discovering electric vehicle charging spots, built with Node.js, Express, MongoDB, and a React frontend.",
+  "keywords": [
+    "EV",
+    "charging",
+    "electric",
+    "vehicles",
+    "charging",
+    "stations",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "React",
+    "backend",
+    "location",
+    "management",
+    "EvSpot"
+  ],
+  "homepage": "https://github.com/abhijeet-swami/EvSpot#readme",
+  "bugs": {
+    "url": "https://github.com/abhijeet-swami/EvSpot/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhijeet-swami/EvSpot.git"
+  },
+  "license": "MIT",
+  "author": "Abhijeet Swami",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon ./src/server.js"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.18.0"
+  }
+}
