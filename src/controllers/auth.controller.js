@@ -4,7 +4,6 @@ import AppError from "../utils/AppError.util.js";
 import sendResponse from "../utils/sendResponse.util.js";
 
 const register = asyncWrapper(async (req, res) => {
-  console.log(1);
   const { fullName, username, email, password } = req.body;
   if (
     [fullName, username, email, password].some((field) => field.trim() === "")
@@ -35,4 +34,26 @@ const register = asyncWrapper(async (req, res) => {
   }
 });
 
-export { register };
+const login = asyncWrapper(async (req, res) => {
+  const { username, password } = req.body;
+  if ([username, password].some((field) => field.trim() === "")) {
+    throw new AppError("All fields are required", 400);
+  }
+
+  const user = await User.findOne({ username });
+  if (!user) throw new AppError("User not exist", 400);
+
+  const isCorrectPassword = await user.verifyPassword(password);
+  if (!isCorrectPassword)
+    throw new AppError("Incorrect username or password!", 400);
+
+  const data = {
+    fullName: user.fullName,
+    username: user.username,
+    email: user.email,
+  };
+
+  sendResponse(res, 200, "Login successfully", data);
+});
+
+export { register, login };
