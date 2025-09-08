@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema(
       trim: true,
     },
     password: {
-      type: string,
+      type: String,
       required: true,
     },
     favoriteStations: [
@@ -50,9 +50,9 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-userSchema.methods.verifyPassword(async function (password) {
+userSchema.methods.verifyPassword = async function (password) {
   return await bcrypt.compare(password, this.password);
-});
+};
 
 const User = mongoose.model("User", userSchema);
 
