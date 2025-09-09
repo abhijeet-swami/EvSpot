@@ -12,23 +12,23 @@ const verifyAuth = asyncWrapper(async (req, res, next) => {
     );
   }
 
-  const decodedPayload = verifyToken(token);
-  if (!decodedPayload) {
+  const isvalidToken = verifyToken(token);
+  if (!isvalidToken) {
     throw new AppError(
       "Invalid token or token has expired. Please log in again.",
       401,
     );
   }
 
-  const user = await User.findById(decodedPayload._id).select("-password");
-  if (!user) {
+  const userExists = await User.exists({ _id: isvalidToken._id });
+  if (!userExists) {
     throw new AppError(
       "The user belonging to this token no longer exists.",
       401,
     );
   }
 
-  req.user = user;
+  req._id = isvalidToken._id;
 
   next();
 });
