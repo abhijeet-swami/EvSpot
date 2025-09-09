@@ -2,7 +2,7 @@ import User from "../models/user.model.js";
 import asyncWrapper from "../utils/asyncWrapper.util.js";
 import AppError from "../utils/AppError.util.js";
 import sendResponse from "../utils/sendResponse.util.js";
-import { genrateToken, verifyToken } from "../utils/token.util.js";
+import { genrateToken } from "../utils/token.util.js";
 
 const register = asyncWrapper(async (req, res) => {
   const { fullName, username, email, password } = req.body;
