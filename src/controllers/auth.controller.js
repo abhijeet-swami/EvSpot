@@ -2,6 +2,7 @@ import User from "../models/user.model.js";
 import asyncWrapper from "../utils/asyncWrapper.util.js";
 import AppError from "../utils/AppError.util.js";
 import sendResponse from "../utils/sendResponse.util.js";
+import { genrateToken } from "../utils/token.util.js";
 
 const register = asyncWrapper(async (req, res) => {
   const { fullName, username, email, password } = req.body;
@@ -24,7 +25,11 @@ const register = asyncWrapper(async (req, res) => {
       username: user.username,
       email: user.email,
     };
-    sendResponse(res, 201, "User registered successfully", data);
+
+    const token = genrateToken(user._id);
+    if (!token) throw new AppError("Something went wrong!", 400);
+
+    sendResponse(res, 201, "User registered successfully", data, token);
   } catch (err) {
     if (err.code === 11000) {
       const field = Object.keys(err.keyValue)[0];
@@ -53,7 +58,10 @@ const login = asyncWrapper(async (req, res) => {
     email: user.email,
   };
 
-  sendResponse(res, 200, "Login successfully", data);
+  const token = genrateToken(user._id);
+  if (!token) throw new AppError("Something went wrong!", 400);
+
+  sendResponse(res, 200, "Login successfully", data, token);
 });
 
 export { register, login };
