@@ -2,7 +2,7 @@ import User from "../models/user.model.js";
 import asyncWrapper from "../utils/asyncWrapper.util.js";
 import AppError from "../utils/AppError.util.js";
 import sendResponse from "../utils/sendResponse.util.js";
-import { genrateToken } from "../utils/token.util.js";
+import { genrateToken, verifyToken } from "../utils/token.util.js";
 
 const register = asyncWrapper(async (req, res) => {
   const { fullName, username, email, password } = req.body;
@@ -50,7 +50,7 @@ const login = asyncWrapper(async (req, res) => {
 
   const isCorrectPassword = await user.verifyPassword(password);
   if (!isCorrectPassword)
-    throw new AppError("Incorrect username or password!", 400);
+    throw new AppError("Incorrect username or password!", 401);
 
   const data = {
     fullName: user.fullName,

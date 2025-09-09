@@ -8,7 +8,11 @@ const genrateToken = (user_id) => {
 };
 
 const verifyToken = (token) => {
-  return jwt.decode(token);
+  try {
+    return jwt.verify(token, process.env.ACCESS_TOKEN_KEY);
+  } catch {
+    return null;
+  }
 };
 
 export { genrateToken, verifyToken };
