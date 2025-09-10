@@ -12,4 +12,7 @@ app.use("/api/v1/auth", authRouter);
 import userRouter from "./routes/user.route.js";
 app.use("/api/v1/user", userRouter);
 
+import stationRouter from "./routes/station.route.js";
+app.use("/api/v1/station", stationRouter);
+
 export default app;
