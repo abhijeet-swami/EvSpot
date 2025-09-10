@@ -9,3 +9,7 @@ node_modules/
 
 # OS generated files
 .DS_Store
+
+stations.json
+stations.js
+package-lock.json

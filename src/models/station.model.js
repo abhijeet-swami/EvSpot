@@ -2,10 +2,20 @@ import mongoose from "mongoose";
 
 const stationSchema = new mongoose.Schema(
   {
-    googleMapsId: {
+    stationName: {
       type: String,
       required: true,
-      unique: true,
+      trim: true,
+    },
+    address: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    city: {
+      type: String,
+      required: true,
+      trim: true,
       index: true,
     },
     location: {
@@ -19,22 +29,15 @@ const stationSchema = new mongoose.Schema(
         required: true,
       },
     },
-    stationName: {
-      type: String,
-      required: true,
+    averageRating: {
+      type: Number,
+      default: 0,
+      min: 0,
+      max: 5,
     },
-    address: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    rating: {
-      type: mongoose.Types.ObjectId,
-      ref: "Rating",
-    },
-    comment: {
-      type: mongoose.Types.ObjectId,
-      ref: "Comment",
+    ratingCount: {
+      type: Number,
+      default: 0,
     },
   },
   {
@@ -42,6 +45,6 @@ const stationSchema = new mongoose.Schema(
   },
 );
 
-const Station = mongoose.model("Station", stationSchema);
+stationSchema.index({ location: "2dsphere" });
 
-export default Station;
+export const Station = mongoose.model("Station", stationSchema);
