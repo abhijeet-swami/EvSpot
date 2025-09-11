@@ -1,4 +1,3 @@
-````markdown
 # EvSpot API Reference
 
 ## Overview
@@ -236,5 +235,3 @@ Endpoints for managing user-specific data.
   "rating_id": "68c25726eaf0811270e8b6d6"
 }
 ```
-
----
