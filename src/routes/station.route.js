@@ -6,9 +6,11 @@ const router = express.Router();
 import {
   nearbyStation,
   getStationByCity,
+  fetchStation,
 } from "../controllers/station.controller.js";
 router.get("/nearby", nearbyStation);
 router.get("/", getStationByCity);
+router.get("/get/station", fetchStation);
 
 import {
   addComment,
