@@ -17,4 +17,8 @@ import {
 router.post("/addcomment", verifyAuth, addComment);
 router.delete("/deletecomment", verifyAuth, deleteComment);
 
+import { addRating, updateRating } from "../controllers/rating.controller.js";
+router.post("/addrating", verifyAuth, addRating);
+router.put("/updaterating", verifyAuth, updateRating);
+
 export default router;
