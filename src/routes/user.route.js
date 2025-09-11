@@ -7,7 +7,8 @@ import { fetchUserProfile } from "../controllers/user.controller.js";
 
 router.get("/me", verifyAuth, fetchUserProfile);
 
-import { favStation } from "../controllers/user.controller.js";
+import { favStation, fetchFavStation } from "../controllers/user.controller.js";
 router.post("/favorite", verifyAuth, favStation);
+router.get("/get/favorite", verifyAuth, fetchFavStation);
 
 export default router;
