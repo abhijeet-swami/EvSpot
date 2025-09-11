@@ -37,10 +37,15 @@ const deleteComment = asyncWrapper(async (req, res) => {
     throw new AppError("Comment id required!", 400);
   }
 
-  const comment = await Comment.findByIdAndDelete(comment_id);
+  const comment = await Comment.findById(comment_id);
   if (!comment) {
     throw new AppError("Comment does not exists!", 400);
   }
+
+  if (!comment.user.equals(req._id)) {
+    throw new AppError("Not authorized to delete this comment", 403);
+  }
+  await comment.deleteOne();
 
   sendResponse(res, 200, "Comment deleted");
 });
