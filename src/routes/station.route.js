@@ -16,11 +16,11 @@ import {
   addComment,
   deleteComment,
 } from "../controllers/comment.controller.js";
-router.post("/addcomment", verifyAuth, addComment);
-router.delete("/deletecomment", verifyAuth, deleteComment);
+router.post("/add/comment", verifyAuth, addComment);
+router.delete("/delete/comment", verifyAuth, deleteComment);
 
 import { addRating, updateRating } from "../controllers/rating.controller.js";
-router.post("/addrating", verifyAuth, addRating);
-router.put("/updaterating", verifyAuth, updateRating);
+router.post("/add/rating", verifyAuth, addRating);
+router.put("/update/rating", verifyAuth, updateRating);
 
 export default router;
