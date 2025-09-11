@@ -41,4 +41,16 @@ const favStation = asyncWrapper(async (req, res) => {
   }
 });
 
-export { fetchUserProfile, favStation };
+const fetchFavStation = asyncWrapper(async (req, res) => {
+  const user = await User.findById(req._id)
+    .select("favoriteStations")
+    .populate({
+      path: "favoriteStations",
+      select: "stationName address averageRating _id",
+      options: { sort: { createdAt: -1 }, limit: 10 },
+    });
+
+  sendResponse(res, 200, "Favorite stations", user);
+});
+
+export { fetchUserProfile, favStation, fetchFavStation };
