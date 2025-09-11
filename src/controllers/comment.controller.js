@@ -6,8 +6,13 @@ import { Comment } from "../models/comment.model.js";
 
 const addComment = asyncWrapper(async (req, res) => {
   const { comment, station_id } = req.body;
-  if ([comment, station_id].some((field) => field.trim() === "")) {
-    throw new AppError(`${field} required!`, 400);
+  if (
+    !comment ||
+    !station_id ||
+    comment.trim() === "" ||
+    station_id.trim() === ""
+  ) {
+    throw new AppError("All fields are required!", 400);
   }
 
   const station = await Station.exists({ _id: station_id });
@@ -23,6 +28,7 @@ const addComment = asyncWrapper(async (req, res) => {
   await cmnt.save();
 
   const data = {
+    _id: cmnt._id,
     comment: cmnt.text,
     station_id: cmnt.station,
     createdAt: cmnt.createdAt,
