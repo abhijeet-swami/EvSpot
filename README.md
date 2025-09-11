@@ -25,8 +25,6 @@ Creates a new user account.
   * **Endpoint**: `POST /auth/register`
   * **Authentication**: None
 
----
-
 **Request Body:**
 
 ```json
@@ -54,8 +52,6 @@ Authenticates a user and sets the session cookie.
 
 * **Endpoint**: `POST /auth/login`
 * **Authentication**: None
-
----
 
 **Request Body:**
 
@@ -92,8 +88,6 @@ Endpoints for managing user-specific data.
 * **Endpoint**: `POST /user/favorite`
 * **Authentication**: Required
 
----
-
 **Request Body:**
 
 ```json
@@ -115,8 +109,6 @@ Endpoints for managing user-specific data.
 * **Endpoint**: `GET /station/nearby`
 * **Authentication**: None
 
----
-
 **Query Parameters:**
 
 | Parameter | Type   | Required | Description              |
@@ -134,8 +126,6 @@ Endpoints for managing user-specific data.
 * **Endpoint**: `GET /station`
 * **Authentication**: None
 
----
-
 **Query Parameters:**
 
 | Parameter | Type   | Required | Description                          |
@@ -150,8 +140,6 @@ Endpoints for managing user-specific data.
 
 * **Endpoint**: `GET /station/get/station`
 * **Authentication**: None
-
----
 
 **Query Parameters:**
 
@@ -170,8 +158,6 @@ Endpoints for managing user-specific data.
 * **Endpoint**: `POST /station/add/comment`
 * **Authentication**: Required
 
----
-
 **Request Body:**
 
 ```json
@@ -187,8 +173,6 @@ Endpoints for managing user-specific data.
 
 * **Endpoint**: `DELETE /station/delete/comment`
 * **Authentication**: Required
-
----
 
 **Request Body:**
 
@@ -207,8 +191,6 @@ Endpoints for managing user-specific data.
 * **Endpoint**: `POST /station/add/rating`
 * **Authentication**: Required
 
----
-
 **Request Body:**
 
 ```json
@@ -224,8 +206,6 @@ Endpoints for managing user-specific data.
 
 * **Endpoint**: `PUT /station/update/rating`
 * **Authentication**: Required
-
----
 
 **Request Body:**
 
