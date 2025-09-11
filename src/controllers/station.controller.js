@@ -39,4 +39,18 @@ const getStationByCity = asyncWrapper(async (req, res) => {
   sendResponse(res, 200, `Stations in ${city} fetched successfully`, stations);
 });
 
-export { nearbyStation, getStationByCity };
+const fetchStation = asyncWrapper(async (req, res) => {
+  const id = req.query?.id;
+  if (!id || id.trim() === "") {
+    throw new AppError("Station id required!", 400);
+  }
+
+  const station = await Station.findById(id);
+  if (!station) {
+    throw new AppError("Station not found!", 400);
+  }
+
+  sendResponse(res, 200, "Station details", station);
+});
+
+export { nearbyStation, getStationByCity, fetchStation };
