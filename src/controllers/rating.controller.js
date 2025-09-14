@@ -41,6 +41,7 @@ const updateRating = asyncWrapper(async (req, res) => {
   }
 
   isRating.rating = parseInt(ratingCount);
+  isRating.updated = true;
   await isRating.save();
 
   sendResponse(res, 200, "Rating updated!");
