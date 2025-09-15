@@ -48,7 +48,6 @@ const updateRating = asyncWrapper(async (req, res) => {
   }
   const currentRating = isRating.rating;
   isRating.rating = parseInt(ratingCount);
-  isRating.updated = true;
   await isRating.save();
 
   const station = await Station.findById(isRating.station).select(
