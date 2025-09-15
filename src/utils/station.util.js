@@ -1,6 +1,4 @@
 import AppError from "./AppError.util.js";
-import { Station } from "../models/station.model.js";
-import { Rating } from "../models/rating.model.js";
 
 const checkCoordinates = (lat, lng, radius) => {
   if (!lat || !lng || !radius) {
@@ -33,13 +31,4 @@ const checkCoordinates = (lat, lng, radius) => {
   };
 };
 
-const getRating = async (stationID) => {
-  const rating = await Rating.find({ station: stationID }).select(
-    "rating -_id",
-  );
-  let ratings = 0;
-  rating.forEach((i) => (ratings += i.rating));
-  return ratings;
-};
-
-export { checkCoordinates, getRating };
+export { checkCoordinates };

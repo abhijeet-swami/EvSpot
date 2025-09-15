@@ -35,6 +35,10 @@ const stationSchema = new mongoose.Schema(
       min: 0,
       max: 5,
     },
+    totalRating: {
+      type: Number,
+      default: 0,
+    },
     ratingCount: {
       type: Number,
       default: 0,

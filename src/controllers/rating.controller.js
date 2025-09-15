@@ -10,8 +10,10 @@ const addRating = asyncWrapper(async (req, res) => {
     throw new AppError("Fields required", 400);
   }
 
-  const isStationExists = await Station.exists({ _id: station_id });
-  if (!isStationExists) {
+  const station = await Station.findById(station_id).select(
+    "ratingCount averageRating totalRating",
+  );
+  if (!station) {
     throw new AppError("Station not exists!", 400);
   }
 
@@ -21,6 +23,11 @@ const addRating = asyncWrapper(async (req, res) => {
     station: station_id,
   });
   await rating.save();
+
+  station.ratingCount += 1;
+  station.totalRating += ratingCount;
+  station.averageRating = station.totalRating / station.ratingCount;
+  await station.save();
 
   sendResponse(res, 201, "Rating added!", rating._id);
 });
@@ -39,10 +46,18 @@ const updateRating = asyncWrapper(async (req, res) => {
   if (!isRating.user.equals(req._id)) {
     throw new AppError("Not authorized to update this rating", 403);
   }
-
+  const currentRating = isRating.rating;
   isRating.rating = parseInt(ratingCount);
   isRating.updated = true;
   await isRating.save();
+
+  const station = await Station.findById(isRating.station).select(
+    "totalRating averageRating ratingCount",
+  );
+  station.totalRating -= currentRating;
+  station.totalRating += ratingCount;
+  station.averageRating = station.totalRating / station.ratingCount;
+  await station.save();
 
   sendResponse(res, 200, "Rating updated!");
 });
